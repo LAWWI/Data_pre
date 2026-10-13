@@ -1,0 +1,51 @@
+# ======== ข้อมูลดิบ — ใหญ่เกินกว่าจะ commit (~150 MB) ========
+creditcard.csv
+*.zip
+
+# ======== ผลลัพธ์ที่ pipeline สร้างเอง ========
+# ไม่ commit ของที่ `python main.py` สร้างใหม่ได้เสมอ
+# ยกเว้น sample CSV ที่ใช้อ้างอิงหน้าตาข้อมูล
+outputs/*
+!outputs/.gitkeep
+!outputs/sample_test_2000.csv
+logs/*
+!logs/.gitkeep
+
+# ไฟล์ binary/โมเดล ที่หลงมาอยู่นอก outputs/
+*.npz
+*.joblib
+*.pkl
+
+# ======== Python ========
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# ======== cache ของเครื่องมือ ========
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ======== editor / IDE ========
+.vscode/
+.idea/
+*.swp
+
+# ======== ระบบปฏิบัติการ ========
+Thumbs.db
+desktop.ini
+.DS_Store
