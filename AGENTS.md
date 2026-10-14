@@ -24,10 +24,11 @@ python main.py                 # รันทั้ง pipeline (STEP 1-10) ใ�
 | `agent/modeling.py` | STEP 9: เทรน LogisticRegression 3 แบบเทียบผล |
 | `agent/charts.py` | กราฟ matplotlib → base64 PNG ฝังใน HTML |
 | `agent/report.py` | STEP 10: สร้าง HTML → PDF ด้วย Chrome headless |
-| `outputs/`, `logs/` | ผลลัพธ์ทั้งหมด (สร้างอัตโนมัติโดย `config.py`) |
+| `outputs/`, `logs/` | ผลลัพธ์ทั้งหมด (สร้างอัตโนมัติโดย `config.py`) — `outputs/` commit ไว้ด้วย, `logs/` ไม่ commit |
 
-`creditcard.csv` ขนาด ~150 MB **ห้าม commit และห้ามอ่านทั้งไฟล์เข้า context**
-ถ้าต้องดูข้อมูลให้ใช้ `outputs/sample_test_2000.csv` หรืออ่าน `outputs/summary.json`
+`creditcard.csv` ขนาด ~150 MB commit ไว้แล้วผ่าน Git LFS (กฎอยู่ใน `.gitattributes`)
+แต่ **ห้ามอ่านทั้งไฟล์เข้า context** ถ้าต้องดูข้อมูลให้ใช้ `outputs/sample_test_2000.csv`
+หรืออ่าน `outputs/summary.json` — ไฟล์ใหม่ที่ใหญ่กว่า 50 MB ให้ track ด้วย LFS ด้วยเสมอ
 
 ## กฎที่ห้ามละเมิด (ไม่อย่างนั้นผลวิเคราะห์ผิด)
 

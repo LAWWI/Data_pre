@@ -1,20 +1,19 @@
-# ======== ข้อมูลดิบ — ใหญ่เกินกว่าจะ commit (~150 MB) ========
-creditcard.csv
+# ======== ข้อมูลดิบ ========
+# creditcard.csv commit มาด้วยแล้วผ่าน Git LFS (ดู .gitattributes)
 *.zip
 
 # ======== ผลลัพธ์ที่ pipeline สร้างเอง ========
-# ไม่ commit ของที่ `python main.py` สร้างใหม่ได้เสมอ
-# ยกเว้น sample CSV ที่ใช้อ้างอิงหน้าตาข้อมูล
-outputs/*
-!outputs/.gitkeep
-!outputs/sample_test_2000.csv
+# outputs/ commit มาด้วยทั้งหมด เพื่อให้ตรวจผลได้โดยไม่ต้องรัน pipeline ซ้ำ
+# (processed.npz ขนาด ~73 MB เก็บผ่าน Git LFS)
+# log ของแต่ละรอบไม่ commit — สร้างใหม่ทุกครั้งที่รัน main.py
 logs/*
 !logs/.gitkeep
 
-# ไฟล์ binary/โมเดล ที่หลงมาอยู่นอก outputs/
-*.npz
-*.joblib
-*.pkl
+# ไฟล์ binary/โมเดล ที่หลงมาอยู่นอก outputs/ (anchor ที่ root เท่านั้น
+# ไม่ให้ไปบังของใน outputs/)
+/*.npz
+/*.joblib
+/*.pkl
 
 # ======== Python ========
 __pycache__/

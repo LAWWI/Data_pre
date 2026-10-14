@@ -91,9 +91,11 @@ SMOTE ทำบน train เท่านั้น, และวัดผลด�
 
 ### สิ่งที่ต้องมี
 - Python 3.10+ (พัฒนาและทดสอบบน 3.13 / Windows)
-- `creditcard.csv` วางไว้ที่ root ของโปรเจกต์
-  (ไม่ได้ commit มาด้วยเพราะขนาด ~150 MB — ดาวน์โหลดจาก
-  [Kaggle: Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud))
+- [Git LFS](https://git-lfs.com/) — `creditcard.csv` (~150 MB) และ `outputs/processed.npz`
+  (~73 MB) commit มาด้วยแล้วผ่าน LFS ติดตั้ง LFS ก่อน clone แล้วไฟล์จะมาครบเอง
+  ถ้า clone มาแล้วได้เป็นไฟล์ pointer ข้อความสั้นๆ ให้รัน `git lfs pull`
+  ต้นฉบับของ dataset มาจาก
+  [Kaggle: Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
 - Chrome หรือ Edge สำหรับแปลง HTML → PDF *(ไม่มีก็ได้ จะได้แค่ HTML)*
 
 ### รัน
@@ -147,7 +149,8 @@ Data_pre/
 ├── main.py              orchestrator — เรียก step ตามลำดับ เก็บผลลง dict S
 ├── requirements.txt
 ├── AGENTS.md            คู่มือสำหรับ AI agent ที่มาแก้โปรเจกต์นี้ (กฎห้ามละเมิด)
-├── creditcard.csv        ← ต้องวางเอง (ไม่ commit)
+├── .gitattributes       กฎ Git LFS สำหรับไฟล์ข้อมูลขนาดใหญ่
+├── creditcard.csv       ข้อมูลดิบ 284,807 แถว (commit ผ่าน Git LFS)
 ├── agent/
 │   ├── config.py        path + hyperparameter ทั้งหมด
 │   ├── logger.py        logger กลาง (ไฟล์ + console UTF-8) พร้อม RUN_ID
@@ -155,8 +158,8 @@ Data_pre/
 │   ├── modeling.py      STEP 9
 │   ├── charts.py        กราฟ matplotlib → base64 PNG
 │   └── report.py        STEP 10 — HTML → PDF
-├── outputs/             (สร้างอัตโนมัติ)
-└── logs/                (สร้างอัตโนมัติ)
+├── outputs/             ผลลัพธ์ของรอบล่าสุด (commit มาด้วย)
+└── logs/                (สร้างอัตโนมัติ ไม่ commit)
 ```
 
 ### ไฟล์ผลลัพธ์
@@ -167,8 +170,8 @@ Data_pre/
 | `outputs/scalers.joblib` | scaler ที่ fit แล้ว สำหรับ transform ข้อมูลใหม่ |
 | `outputs/summary.json` | ตัวเลขสรุปทุกขั้นตอน (ใช้อ่านแทนการเปิด CSV) |
 | `outputs/sample_test_2000.csv` | ตัวอย่าง test set 2,000 แถว (UTF-8 BOM เปิดใน Excel ได้) |
-| `logs/agent.log` | log สะสมทุกรอบ |
-| `logs/run_<timestamp>.log` | log แยกต่อรอบ |
+| `logs/agent.log` | log สะสมทุกรอบ *(ไม่ commit — เกิดใหม่เมื่อรัน)* |
+| `logs/run_<timestamp>.log` | log แยกต่อรอบ *(ไม่ commit — เกิดใหม่เมื่อรัน)* |
 
 ---
 
