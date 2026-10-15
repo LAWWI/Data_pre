@@ -1,0 +1,142 @@
+{
+  "method": "L1 Regularization (Lasso) via LogisticRegression",
+  "solver": "liblinear",
+  "primary_C": 0.1,
+  "dataset_split": "Train Set (80%)",
+  "total_features": 32,
+  "selected_count": 20,
+  "eliminated_count": 12,
+  "c_comparison": {
+    "C=1.0": {
+      "selected_features": 29,
+      "dropped_features": 3,
+      "sparsity_pct": 9.4
+    },
+    "C=0.1": {
+      "selected_features": 20,
+      "dropped_features": 12,
+      "sparsity_pct": 37.5
+    },
+    "C=0.01": {
+      "selected_features": 7,
+      "dropped_features": 25,
+      "sparsity_pct": 78.1
+    }
+  },
+  "selected_features": [
+    {
+      "feature": "V14",
+      "coefficient": -0.6574,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V4",
+      "coefficient": 0.5121,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V10",
+      "coefficient": -0.4986,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V22",
+      "coefficient": 0.3898,
+      "direction": "Positive"
+    },
+    {
+      "feature": "Hour_sin",
+      "coefficient": -0.2826,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V21",
+      "coefficient": 0.2467,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V16",
+      "coefficient": -0.1934,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V8",
+      "coefficient": -0.1859,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V27",
+      "coefficient": -0.1695,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V13",
+      "coefficient": -0.1021,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V20",
+      "coefficient": -0.0898,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V12",
+      "coefficient": -0.0782,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V9",
+      "coefficient": -0.0744,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V15",
+      "coefficient": -0.0528,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V5",
+      "coefficient": 0.0459,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V23",
+      "coefficient": -0.0451,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V17",
+      "coefficient": -0.0362,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V28",
+      "coefficient": -0.0143,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V6",
+      "coefficient": -0.0024,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V3",
+      "coefficient": -0.0007,
+      "direction": "Negative"
+    }
+  ],
+  "eliminated_features": [
+    "V11",
+    "V2",
+    "V1",
+    "V7",
+    "V24",
+    "V19",
+    "V18",
+    "V26",
+    "V25",
+    "Hour_cos",
+    "Amount_scaled",
+    "Time_scaled"
+  ]
+}

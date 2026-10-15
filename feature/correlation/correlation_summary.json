@@ -1,0 +1,110 @@
+{
+  "method": "Pearson Correlation Matrix",
+  "dataset_split": "Train Set (80%)",
+  "rows_analyzed": 226980,
+  "total_features": 32,
+  "top_15_features": [
+    {
+      "feature": "V17",
+      "correlation": -0.3207,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V14",
+      "correlation": -0.3016,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V12",
+      "correlation": -0.2547,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V10",
+      "correlation": -0.2116,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V16",
+      "correlation": -0.1903,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V3",
+      "correlation": -0.1889,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V7",
+      "correlation": -0.181,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V11",
+      "correlation": 0.1521,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V4",
+      "correlation": 0.1297,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V18",
+      "correlation": -0.1071,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V1",
+      "correlation": -0.0976,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V9",
+      "correlation": -0.0957,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V5",
+      "correlation": -0.092,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V2",
+      "correlation": 0.0875,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V6",
+      "correlation": -0.0447,
+      "direction": "Negative"
+    }
+  ],
+  "bottom_5_features": [
+    {
+      "feature": "V25",
+      "correlation": 0.0046,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V23",
+      "correlation": -0.0041,
+      "direction": "Negative"
+    },
+    {
+      "feature": "V15",
+      "correlation": -0.0037,
+      "direction": "Negative"
+    },
+    {
+      "feature": "Hour_cos",
+      "correlation": 0.0036,
+      "direction": "Positive"
+    },
+    {
+      "feature": "V13",
+      "correlation": -0.0027,
+      "direction": "Negative"
+    }
+  ]
+}
