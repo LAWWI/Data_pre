@@ -142,6 +142,55 @@ python main.py
 
 ---
 
+## ขั้นวิเคราะห์ด้วย 3 อัลกอริทึม (`analyze/`)
+
+ต่อยอดจาก `outputs/processed.npz` ไปเทรนจริงด้วยอัลกอริทึมจำแนก 3 ตระกูล
+แล้วตัดสินด้วย **AUPRC** ตามวัตถุประสงค์ใน `Introduction.txt`
+(ไม่อ่าน `creditcard.csv` ซ้ำ จึงต้องรัน `python main.py` ให้จบก่อน)
+
+```powershell
+python analyze/logistic_regression/lr_analysis.py   # ~10 วินาที
+python analyze/random_forest/rf_analysis.py         # ~85 วินาที
+python analyze/gradient_boosting/gb_analysis.py     # ~20 วินาที
+python analyze/compare_all.py                       # รวมผล + เขียน SUMMARY.md
+```
+
+วัดบน test set ที่คงการกระจายจริงไว้ (fraud 95 จาก 56,746 แถว)
+ตัวเลขเต็มอยู่ใน `analyze/SUMMARY.md` และ `analyze/comparison_all_models.csv`
+
+| อัลกอริทึม | วิธีแก้ imbalance ที่ดีที่สุด | AUPRC | F1 ดีที่สุด | Recall ที่จุดนั้น | FN | FP |
+|---|---|---|---|---|---|---|
+| Histogram Gradient Boosting | `class_weight='balanced'` | **0.825** | 0.852 | 0.758 | 23 | 2 |
+| Random Forest | SMOTE (AUPRC) / `balanced_subsample` (F1) | 0.805 | 0.839 | 0.768 | 22 | 6 |
+| Logistic Regression | `class_weight='balanced'` | 0.681 | 0.814 | 0.758 | 23 | 10 |
+
+### Key Findings (แผนภาพ: `analyze/key_findings.png`)
+
+![Key Findings](analyze/key_findings.png)
+
+1. **accuracy ใช้ตัดสินงานนี้ไม่ได้** — ทายว่า "ไม่โกง" ทุกแถวได้ accuracy 99.833%
+   ทั้งที่จับ fraud ไม่ได้สักเคส
+2. **ROC-AUC สูงไม่ได้แปลว่าดี** — LR มี ROC-AUC สูงกว่า RF อยู่ 0.027
+   แต่ AUPRC ต่ำกว่าถึง 0.139 เพราะ ROC-AUC ถูกถ่วงด้วย true negative นับแสนแถว
+3. **ตั้ง threshold ผิด โมเดลดีก็พัง** — LR ได้ F1 แค่ 0.105 ที่ค่าปริยาย 0.5
+   แต่ได้ 0.820 เมื่อเลือกจุดตัดจาก PR curve
+4. **SMOTE ไม่ได้ช่วยเสมอ** — ทำให้ Gradient Boosting แย่ลง 0.115 AUPRC
+5. **fraud ใน test มีแค่ 95 เคส** — AUPRC 0.825 มีช่วงความเชื่อมั่น 95% ที่ 0.742–0.894
+   กว้างกว่าช่องว่างระหว่างอันดับ 1 กับ 2
+6. **ทุกจุดตัดคือการแลก** — จับ fraud เพิ่มอีกเคส ต้องยอมแจ้งเตือนผิดเพิ่มแบบเร่งขึ้นเรื่อย ๆ
+
+**ข้อควรระวังก่อนเอาตัวเลขไปใช้** (ฉบับเต็มใน `analyze/SUMMARY.md`)
+threshold ถูกเลือกบน test set เดียวกับที่วัดผล ตัวเลขจึงดูดีเกินจริงราว 0.02 F1 ·
+ช่วงความเชื่อมั่นของอันดับ 1 กับ 2 ซ้อนทับกัน ยังสรุปไม่ได้ว่าใครชนะจริง ·
+ข้อมูลเป็นลำดับเวลาแต่ split แบบสุ่ม · ยังไม่ได้จูน hyperparameter
+
+สรุป: **boosting ชนะทั้งสามตัว** และการปรับ threshold สำคัญกว่าการเลือก SMOTE —
+ที่ threshold 0.5 ตัวที่ถ่วงน้ำหนักคลาสให้ false positive หลักพัน แต่พอเลือกจุดตัด
+จาก PR curve แล้ว ได้ precision 0.97 ที่ recall ใกล้เคียงเดิม
+ส่วน SMOTE ช่วย Random Forest เล็กน้อย แต่ทำให้ Gradient Boosting แย่ลง (0.825 → 0.710)
+
+---
+
 ## โครงสร้างโปรเจกต์
 
 ```
@@ -158,6 +207,16 @@ Data_pre/
 │   ├── modeling.py      STEP 9
 │   ├── charts.py        กราฟ matplotlib → base64 PNG
 │   └── report.py        STEP 10 — HTML → PDF
+├── feature/             คัดเลือกฟีเจอร์ 3 วิธี (correlation / lasso / random forest)
+├── analyze/             วิเคราะห์ด้วยอัลกอริทึมจำแนก 3 ตัว + สรุปผล
+│   ├── common.py        โค้ดกลาง: โหลดข้อมูล เทรน วัดผล เขียนไฟล์ จด progress
+│   ├── logistic_regression/  ALGO 1 linear
+│   ├── random_forest/        ALGO 2 bagging ensemble
+│   ├── gradient_boosting/    ALGO 3 boosting ensemble
+│   ├── key_findings.py  แผนภาพข้อค้นพบ 6 ช่อง + bootstrap CI + ข้อควรระวัง
+│   ├── compare_all.py   รวมผล 3 ตัว → ตาราง + กราฟ + Key Findings + SUMMARY.md
+│   ├── SUMMARY.md       สรุปผล (สร้างใหม่อัตโนมัติทุกครั้งที่รัน compare_all)
+│   └── RUN_LOG.md       บันทึกว่าทำอะไรไป / รันต่อยังไงถ้าปิดเครื่อง
 ├── outputs/             ผลลัพธ์ของรอบล่าสุด (commit มาด้วย)
 └── logs/                (สร้างอัตโนมัติ ไม่ commit)
 ```

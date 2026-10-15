@@ -1,0 +1,3 @@
+﻿Variant,Train_Set,PR_AUC,ROC_AUC,Precision,Recall,F1,TP,FP,FN,TN,Best_F1,Best_F1_Threshold,Fit_Seconds
+LR class_weight=balanced,train (ของจริง),0.6806,0.9665,0.0557,0.8737,0.1047,83,1407,12,55244,0.8136,0.999999,2.13
+LR + SMOTE train,train + SMOTE,0.6656,0.9651,0.1076,0.8632,0.1914,82,680,13,55971,0.8202,0.999964,2.96

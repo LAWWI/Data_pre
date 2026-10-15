@@ -1,0 +1,47 @@
+﻿Variant,Threshold,Precision,Recall,F1,TP,FP,FN,TN
+RF class_weight=balanced_subsample,0.05,0.3062,0.8316,0.4476,79,179,16,56472
+RF class_weight=balanced_subsample,0.1,0.6471,0.8105,0.7196,77,42,18,56609
+RF class_weight=balanced_subsample,0.15,0.7451,0.8,0.7716,76,26,19,56625
+RF class_weight=balanced_subsample,0.2,0.8352,0.8,0.8172,76,15,19,56636
+RF class_weight=balanced_subsample,0.25,0.8605,0.7789,0.8177,74,12,21,56639
+RF class_weight=balanced_subsample,0.3,0.9125,0.7684,0.8343,73,7,22,56644
+RF class_weight=balanced_subsample,0.35,0.9231,0.7579,0.8324,72,6,23,56645
+RF class_weight=balanced_subsample,0.4,0.9342,0.7474,0.8304,71,5,24,56646
+RF class_weight=balanced_subsample,0.45,0.9324,0.7263,0.8166,69,5,26,56646
+RF class_weight=balanced_subsample,0.5,0.9324,0.7263,0.8166,69,5,26,56646
+RF class_weight=balanced_subsample,0.55,0.9583,0.7263,0.8263,69,3,26,56648
+RF class_weight=balanced_subsample,0.6,0.9706,0.6947,0.8098,66,2,29,56649
+RF class_weight=balanced_subsample,0.65,0.9706,0.6947,0.8098,66,2,29,56649
+RF class_weight=balanced_subsample,0.7,0.9706,0.6947,0.8098,66,2,29,56649
+RF class_weight=balanced_subsample,0.75,0.9688,0.6526,0.7799,62,2,33,56649
+RF class_weight=balanced_subsample,0.8,0.9831,0.6105,0.7532,58,1,37,56650
+RF class_weight=balanced_subsample,0.85,0.9821,0.5789,0.7285,55,1,40,56650
+RF class_weight=balanced_subsample,0.9,0.9796,0.5053,0.6667,48,1,47,56650
+RF class_weight=balanced_subsample,0.95,0.9688,0.3263,0.4882,31,1,64,56650
+RF class_weight=balanced_subsample,0.97,0.9655,0.2947,0.4516,28,1,67,56650
+RF class_weight=balanced_subsample,0.99,1.0,0.1158,0.2075,11,0,84,56651
+RF class_weight=balanced_subsample,0.995,1.0,0.0842,0.1553,8,0,87,56651
+RF class_weight=balanced_subsample,0.999,1.0,0.0842,0.1553,8,0,87,56651
+RF + SMOTE train,0.05,0.0581,0.8947,0.109,85,1379,10,55272
+RF + SMOTE train,0.1,0.1674,0.8526,0.2798,81,403,14,56248
+RF + SMOTE train,0.15,0.3047,0.8211,0.4444,78,178,17,56473
+RF + SMOTE train,0.2,0.4699,0.8211,0.5977,78,88,17,56563
+RF + SMOTE train,0.25,0.6047,0.8211,0.6964,78,51,17,56600
+RF + SMOTE train,0.3,0.7,0.8105,0.7512,77,33,18,56618
+RF + SMOTE train,0.35,0.7857,0.8105,0.7979,77,21,18,56630
+RF + SMOTE train,0.4,0.8,0.8,0.8,76,19,19,56632
+RF + SMOTE train,0.45,0.8242,0.7895,0.8065,75,16,20,56635
+RF + SMOTE train,0.5,0.8588,0.7684,0.8111,73,12,22,56639
+RF + SMOTE train,0.55,0.8875,0.7474,0.8114,71,9,24,56642
+RF + SMOTE train,0.6,0.9103,0.7474,0.8208,71,7,24,56644
+RF + SMOTE train,0.65,0.9221,0.7474,0.8256,71,6,24,56645
+RF + SMOTE train,0.7,0.9459,0.7368,0.8284,70,4,25,56647
+RF + SMOTE train,0.75,0.9714,0.7158,0.8242,68,2,27,56649
+RF + SMOTE train,0.8,0.9714,0.7158,0.8242,68,2,27,56649
+RF + SMOTE train,0.85,0.9692,0.6632,0.7875,63,2,32,56649
+RF + SMOTE train,0.9,0.9833,0.6211,0.7613,59,1,36,56650
+RF + SMOTE train,0.95,0.9811,0.5474,0.7027,52,1,43,56650
+RF + SMOTE train,0.97,0.9787,0.4842,0.6479,46,1,49,56650
+RF + SMOTE train,0.99,0.9737,0.3895,0.5564,37,1,58,56650
+RF + SMOTE train,0.995,0.9655,0.2947,0.4516,28,1,67,56650
+RF + SMOTE train,0.999,0.9474,0.1895,0.3158,18,1,77,56650

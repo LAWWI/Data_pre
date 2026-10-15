@@ -1,0 +1,237 @@
+{
+  "test_rows": 56746,
+  "test_fraud": 95,
+  "trivial_baseline": {
+    "rows": 56746,
+    "fraud": 95,
+    "accuracy": 99.833,
+    "recall": 0.0,
+    "fraud_caught": 0
+  },
+  "algorithms": [
+    {
+      "label": "1) Logistic Regression",
+      "color_key": "lr",
+      "best_variant": "LR class_weight=balanced",
+      "pr_auc": 0.6806,
+      "roc_auc": 0.9665,
+      "auprc_ci": {
+        "mean": 0.7225,
+        "lo": 0.6363,
+        "hi": 0.8103,
+        "n_bootstrap": 500
+      },
+      "threshold_transfer": {
+        "threshold_from_half_A": 1.0,
+        "f1_on_half_B": 0.7959,
+        "f1_oracle_on_half_B": 0.7959,
+        "optimism_gap": 0.0
+      },
+      "variants": [
+        {
+          "name": "LR class_weight=balanced",
+          "train_set": "train (ของจริง)",
+          "pr_auc": 0.6806,
+          "roc_auc": 0.9665,
+          "f1_at_0.5": 0.1047,
+          "best_f1": 0.8136,
+          "best_f1_threshold": 0.999999
+        },
+        {
+          "name": "LR + SMOTE train",
+          "train_set": "train + SMOTE",
+          "pr_auc": 0.6656,
+          "roc_auc": 0.9651,
+          "f1_at_0.5": 0.1914,
+          "best_f1": 0.8202,
+          "best_f1_threshold": 0.999964
+        }
+      ],
+      "smote_effect": {
+        "class_weight_auprc": 0.6806,
+        "smote_auprc": 0.6656,
+        "delta": -0.015
+      }
+    },
+    {
+      "label": "2) Random Forest",
+      "color_key": "rf",
+      "best_variant": "RF + SMOTE train",
+      "pr_auc": 0.8045,
+      "roc_auc": 0.9788,
+      "auprc_ci": {
+        "mean": 0.8061,
+        "lo": 0.7265,
+        "hi": 0.883,
+        "n_bootstrap": 500
+      },
+      "threshold_transfer": {
+        "threshold_from_half_A": 0.494401,
+        "f1_on_half_B": 0.8,
+        "f1_oracle_on_half_B": 0.8387,
+        "optimism_gap": 0.0387
+      },
+      "variants": [
+        {
+          "name": "RF class_weight=balanced_subsample",
+          "train_set": "train (ของจริง)",
+          "pr_auc": 0.8043,
+          "roc_auc": 0.9382,
+          "f1_at_0.5": 0.8166,
+          "best_f1": 0.8391,
+          "best_f1_threshold": 0.332979
+        },
+        {
+          "name": "RF + SMOTE train",
+          "train_set": "train + SMOTE",
+          "pr_auc": 0.8045,
+          "roc_auc": 0.9788,
+          "f1_at_0.5": 0.8111,
+          "best_f1": 0.8284,
+          "best_f1_threshold": 0.702886
+        }
+      ],
+      "smote_effect": {
+        "class_weight_auprc": 0.8043,
+        "smote_auprc": 0.8045,
+        "delta": 0.0002
+      }
+    },
+    {
+      "label": "3) Gradient Boosting",
+      "color_key": "gb",
+      "best_variant": "GB class_weight=balanced",
+      "pr_auc": 0.8252,
+      "roc_auc": 0.97,
+      "auprc_ci": {
+        "mean": 0.8188,
+        "lo": 0.7415,
+        "hi": 0.8936,
+        "n_bootstrap": 500
+      },
+      "threshold_transfer": {
+        "threshold_from_half_A": 0.978889,
+        "f1_on_half_B": 0.8043,
+        "f1_oracle_on_half_B": 0.8247,
+        "optimism_gap": 0.0204
+      },
+      "variants": [
+        {
+          "name": "GB class_weight=balanced",
+          "train_set": "train (ของจริง)",
+          "pr_auc": 0.8252,
+          "roc_auc": 0.97,
+          "f1_at_0.5": 0.8488,
+          "best_f1": 0.8521,
+          "best_f1_threshold": 0.935315
+        },
+        {
+          "name": "GB + SMOTE train",
+          "train_set": "train + SMOTE",
+          "pr_auc": 0.71,
+          "roc_auc": 0.9621,
+          "f1_at_0.5": 0.8111,
+          "best_f1": 0.8421,
+          "best_f1_threshold": 0.945569
+        }
+      ],
+      "smote_effect": {
+        "class_weight_auprc": 0.8252,
+        "smote_auprc": 0.71,
+        "delta": -0.1152
+      }
+    }
+  ],
+  "roc_vs_auprc_contradictions": [
+    {
+      "higher_roc_lower_auprc": {
+        "label": "1) Logistic Regression",
+        "code": "LR",
+        "variant": "LR + SMOTE train",
+        "roc_auc": 0.9651,
+        "pr_auc": 0.6656
+      },
+      "lower_roc_higher_auprc": {
+        "label": "2) Random Forest",
+        "code": "RF",
+        "variant": "RF class_weight=balanced_subsample",
+        "roc_auc": 0.9382,
+        "pr_auc": 0.8043
+      },
+      "roc_gap": 0.0269,
+      "auprc_gap": 0.1387
+    },
+    {
+      "higher_roc_lower_auprc": {
+        "label": "1) Logistic Regression",
+        "code": "LR",
+        "variant": "LR class_weight=balanced",
+        "roc_auc": 0.9665,
+        "pr_auc": 0.6806
+      },
+      "lower_roc_higher_auprc": {
+        "label": "2) Random Forest",
+        "code": "RF",
+        "variant": "RF class_weight=balanced_subsample",
+        "roc_auc": 0.9382,
+        "pr_auc": 0.8043
+      },
+      "roc_gap": 0.0283,
+      "auprc_gap": 0.1237
+    },
+    {
+      "higher_roc_lower_auprc": {
+        "label": "3) Gradient Boosting",
+        "code": "GB",
+        "variant": "GB + SMOTE train",
+        "roc_auc": 0.9621,
+        "pr_auc": 0.71
+      },
+      "lower_roc_higher_auprc": {
+        "label": "2) Random Forest",
+        "code": "RF",
+        "variant": "RF class_weight=balanced_subsample",
+        "roc_auc": 0.9382,
+        "pr_auc": 0.8043
+      },
+      "roc_gap": 0.0239,
+      "auprc_gap": 0.0943
+    },
+    {
+      "higher_roc_lower_auprc": {
+        "label": "1) Logistic Regression",
+        "code": "LR",
+        "variant": "LR + SMOTE train",
+        "roc_auc": 0.9651,
+        "pr_auc": 0.6656
+      },
+      "lower_roc_higher_auprc": {
+        "label": "3) Gradient Boosting",
+        "code": "GB",
+        "variant": "GB + SMOTE train",
+        "roc_auc": 0.9621,
+        "pr_auc": 0.71
+      },
+      "roc_gap": 0.003,
+      "auprc_gap": 0.0444
+    },
+    {
+      "higher_roc_lower_auprc": {
+        "label": "1) Logistic Regression",
+        "code": "LR",
+        "variant": "LR class_weight=balanced",
+        "roc_auc": 0.9665,
+        "pr_auc": 0.6806
+      },
+      "lower_roc_higher_auprc": {
+        "label": "3) Gradient Boosting",
+        "code": "GB",
+        "variant": "GB + SMOTE train",
+        "roc_auc": 0.9621,
+        "pr_auc": 0.71
+      },
+      "roc_gap": 0.0044,
+      "auprc_gap": 0.0294
+    }
+  ]
+}

@@ -24,6 +24,9 @@ python main.py                 # รันทั้ง pipeline (STEP 1-10) ใ�
 | `agent/modeling.py` | STEP 9: เทรน LogisticRegression 3 แบบเทียบผล |
 | `agent/charts.py` | กราฟ matplotlib → base64 PNG ฝังใน HTML |
 | `agent/report.py` | STEP 10: สร้าง HTML → PDF ด้วย Chrome headless |
+| `feature/` | คัดเลือกฟีเจอร์ 3 วิธี — สคริปต์แยกอิสระ อ่าน `outputs/processed.npz` |
+| `analyze/` | วิเคราะห์ด้วยอัลกอริทึมจำแนก 3 ตัว (LR / RF / HistGB) + `compare_all.py` |
+| `analyze/common.py` | โค้ดกลางของ `analyze/`: `load_data` / `evaluate` / `write_results` / `plot_algorithm` / `mark_progress` |
 | `outputs/`, `logs/` | ผลลัพธ์ทั้งหมด (สร้างอัตโนมัติโดย `config.py`) — `outputs/` commit ไว้ด้วย, `logs/` ไม่ commit |
 
 `creditcard.csv` ขนาด ~150 MB commit ไว้แล้วผ่าน Git LFS (กฎอยู่ใน `.gitattributes`)
@@ -76,6 +79,18 @@ python main.py                 # รันทั้ง pipeline (STEP 1-10) ใ�
   และกราฟ `metrics_chart` วน list `res` อยู่แล้ว ไม่ต้องแก้
 - **เพิ่มกราฟ**: ฟังก์ชันใหม่ใน `charts.py` คืนค่าผ่าน `_b64(fig)` → ใส่ใน dict `imgs`
   → อ้างด้วย `<img src="{...}">` ใน `build_html`
+- **เพิ่มอัลกอริทึมใน `analyze/`**: สร้างโฟลเดอร์ใหม่ เขียนสคริปต์เรียก
+  `common.evaluate()` / `write_results()` / `plot_algorithm()` แบบเดียวกับ 3 ตัวเดิม
+  → เพิ่ม 1 บรรทัดใน `ALGOS` ของ `analyze/compare_all.py` (ตาราง กราฟ และ
+  `SUMMARY.md` วน list ให้เอง) → รัน `python analyze/compare_all.py` ใหม่
+  **ตัวชี้วัดที่ใช้ตัดสินคือ AUPRC** และต้องรายงาน threshold ที่ใช้เสมอ
+  เพราะ threshold 0.5 ไม่ใช่จุดที่เหมาะกับข้อมูล imbalance ชุดนี้
+- **เพิ่มกราฟใน `analyze/`**: ใช้สีจาก `common.PALETTE` เท่านั้น ห้ามใส่ hex เอง
+  จานสีนี้ตรวจเรื่องตาบอดสีมาแล้ว และ**สีผูกกับตัวอัลกอริทึม** (`lr`/`rf`/`gb`)
+  ห้ามให้สีเปลี่ยนตามอันดับหรือตามกราฟ ส่วน `fn`/`fp` สงวนไว้สำหรับชนิดความผิดพลาด
+  ต้องมี label กำกับเสมอ ไม่ให้สีสื่อความหมายลำพัง
+  หัวข้อภาษาไทยในกราฟใช้ได้ เพราะ `common.py` ตั้ง font family เป็น Leelawadee UI ไว้แล้ว
+  และ**ห้ามพล็อต accuracy** ในกราฟไหนก็ตาม
 - **เพิ่มหัวข้อในรายงาน**: แก้ template string ใน `report.build_html`
   ทุก placeholder ต้องมีค่าส่งใน `.format(...)` ท้ายฟังก์ชัน ไม่อย่างนั้น `KeyError`
 

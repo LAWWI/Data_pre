@@ -1,0 +1,142 @@
+{
+  "objective": "จำแนกธุรกรรมทุจริต ประเมินด้วย AUPRC (ตาม Introduction.txt)",
+  "primary_metric": "AUPRC (average precision)",
+  "test_set": {
+    "source": "outputs/processed.npz (ผลจาก pre-processing pipeline)",
+    "train_rows": 226980,
+    "test_rows": 56746,
+    "test_fraud": 95,
+    "test_fraud_pct": 0.1674,
+    "note": "test set ไม่ถูก resample คงการกระจายจริงไว้"
+  },
+  "algorithms": [
+    {
+      "label": "1) Logistic Regression",
+      "method": "Logistic Regression (linear, L2 penalty)",
+      "model_params": {
+        "max_iter": 2000,
+        "penalty": "l2",
+        "solver": "lbfgs",
+        "class_weight": "balanced (variant 1) / None (variant 2)"
+      },
+      "best_variant": {
+        "name": "LR class_weight=balanced",
+        "pr_auc": 0.6806
+      }
+    },
+    {
+      "label": "2) Random Forest",
+      "method": "Random Forest (bagging ensemble of decision trees)",
+      "model_params": {
+        "n_estimators": 200,
+        "max_depth": 16,
+        "min_samples_leaf": 2,
+        "class_weight": "balanced_subsample (variant 1) / None (variant 2)"
+      },
+      "best_variant": {
+        "name": "RF + SMOTE train",
+        "pr_auc": 0.8045
+      }
+    },
+    {
+      "label": "3) Gradient Boosting",
+      "method": "Histogram-based Gradient Boosting (boosting ensemble)",
+      "model_params": {
+        "max_iter": 300,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "early_stopping": false,
+        "class_weight": "balanced (variant 1) / None (variant 2)"
+      },
+      "best_variant": {
+        "name": "GB class_weight=balanced",
+        "pr_auc": 0.8252
+      }
+    }
+  ],
+  "ranking_by_auprc": [
+    {
+      "rank": 1,
+      "variant": "GB class_weight=balanced",
+      "algorithm": "3) Gradient Boosting",
+      "auprc": 0.8252,
+      "roc_auc": 0.97,
+      "best_f1": 0.8521,
+      "best_f1_threshold": 0.935315,
+      "recall_at_best_f1": 0.7579,
+      "precision_at_best_f1": 0.973,
+      "fn_at_best_f1": 23,
+      "fp_at_best_f1": 2
+    },
+    {
+      "rank": 2,
+      "variant": "RF + SMOTE train",
+      "algorithm": "2) Random Forest",
+      "auprc": 0.8045,
+      "roc_auc": 0.9788,
+      "best_f1": 0.8284,
+      "best_f1_threshold": 0.702886,
+      "recall_at_best_f1": 0.7368,
+      "precision_at_best_f1": 0.9459,
+      "fn_at_best_f1": 25,
+      "fp_at_best_f1": 4
+    },
+    {
+      "rank": 3,
+      "variant": "RF class_weight=balanced_subsample",
+      "algorithm": "2) Random Forest",
+      "auprc": 0.8043,
+      "roc_auc": 0.9382,
+      "best_f1": 0.8391,
+      "best_f1_threshold": 0.332979,
+      "recall_at_best_f1": 0.7684,
+      "precision_at_best_f1": 0.9241,
+      "fn_at_best_f1": 22,
+      "fp_at_best_f1": 6
+    },
+    {
+      "rank": 4,
+      "variant": "GB + SMOTE train",
+      "algorithm": "3) Gradient Boosting",
+      "auprc": 0.71,
+      "roc_auc": 0.9621,
+      "best_f1": 0.8421,
+      "best_f1_threshold": 0.945569,
+      "recall_at_best_f1": 0.7579,
+      "precision_at_best_f1": 0.9474,
+      "fn_at_best_f1": 23,
+      "fp_at_best_f1": 4
+    },
+    {
+      "rank": 5,
+      "variant": "LR class_weight=balanced",
+      "algorithm": "1) Logistic Regression",
+      "auprc": 0.6806,
+      "roc_auc": 0.9665,
+      "best_f1": 0.8136,
+      "best_f1_threshold": 0.999999,
+      "recall_at_best_f1": 0.7579,
+      "precision_at_best_f1": 0.878,
+      "fn_at_best_f1": 23,
+      "fp_at_best_f1": 10
+    },
+    {
+      "rank": 6,
+      "variant": "LR + SMOTE train",
+      "algorithm": "1) Logistic Regression",
+      "auprc": 0.6656,
+      "roc_auc": 0.9651,
+      "best_f1": 0.8202,
+      "best_f1_threshold": 0.999964,
+      "recall_at_best_f1": 0.7684,
+      "precision_at_best_f1": 0.8795,
+      "fn_at_best_f1": 22,
+      "fp_at_best_f1": 10
+    }
+  ],
+  "winner": {
+    "variant": "GB class_weight=balanced",
+    "auprc": 0.8252
+  },
+  "note": "ไม่รายงาน accuracy เป็นตัวหลัก เพราะ fraud มีแค่ ~0.17% ทายว่าไม่โกงทุกแถวก็ได้ accuracy 99.8%"
+}

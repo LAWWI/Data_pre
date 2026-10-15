@@ -1,0 +1,7 @@
+﻿Algorithm,Variant,Train_Set,AUPRC,ROC_AUC,Recall_at_0.5,Precision_at_0.5,F1_at_0.5,TP_at_0.5,FP_at_0.5,FN_at_0.5,Best_F1,Best_F1_Threshold,Recall_at_Best_F1,Precision_at_Best_F1,FP_at_Best_F1,FN_at_Best_F1,Max_Recall_at_Precision_50,Fit_Seconds
+3) Gradient Boosting,GB class_weight=balanced,train (ของจริง),0.8252,0.97,0.7684,0.9481,0.8488,73,4,22,0.8521,0.935315,0.7579,0.973,2,23,0.8421,6.95
+2) Random Forest,RF + SMOTE train,train + SMOTE,0.8045,0.9788,0.7684,0.8588,0.8111,73,12,22,0.8284,0.702886,0.7368,0.9459,4,25,0.8211,50.51
+2) Random Forest,RF class_weight=balanced_subsample,train (ของจริง),0.8043,0.9382,0.7263,0.9324,0.8166,69,5,26,0.8391,0.332979,0.7684,0.9241,6,22,0.8211,26.17
+3) Gradient Boosting,GB + SMOTE train,train + SMOTE,0.71,0.9621,0.7684,0.8588,0.8111,73,12,22,0.8421,0.945569,0.7579,0.9474,4,23,0.8105,7.4
+1) Logistic Regression,LR class_weight=balanced,train (ของจริง),0.6806,0.9665,0.8737,0.0557,0.1047,83,1407,12,0.8136,0.999999,0.7579,0.878,10,23,0.8,2.13
+1) Logistic Regression,LR + SMOTE train,train + SMOTE,0.6656,0.9651,0.8632,0.1076,0.1914,82,680,13,0.8202,0.999964,0.7684,0.8795,10,22,0.7895,2.96
